@@ -7,6 +7,8 @@ pub struct Config {
     /// The maximum allowed number of tokens
     pub token_supply: Option<u64>,
     pub frozen: bool,
+    pub reserved_tokens: i32,
+    
 }
 
 pub const CONFIG: Item<Config> = Item::new("config");

@@ -103,6 +103,15 @@ pub enum ExecuteMsg {
     RevokeAll {
         operator: String,
     },
+    ///Send contract address to admin
+    Sweep {
+        denom: String,
+    },
+
+    Reserve {
+        reserve_address: String,
+        token_id: String,
+    }
 }
 
 impl From<ExecuteMsg> for CW721ExecuteMsg<Extension> {
@@ -141,6 +150,8 @@ impl From<ExecuteMsg> for CW721ExecuteMsg<Extension> {
             }
             ExecuteMsg::RevokeAll { operator } => CW721ExecuteMsg::RevokeAll { operator },
             _ => panic!("cannot covert {:?} to CW721ExecuteMsg", msg),
+
+           
         }
     }
 }
@@ -183,6 +194,15 @@ pub enum QueryMsg {
         start_after: Option<String>,
         limit: Option<u32>,
     },
+
+    Reserved {},
+}
+
+// We define a custom struct for each query response
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
+pub struct ReserveResponse {
+  pub reserve_address: String,
+  pub token_id: String,
 }
 
 impl From<QueryMsg> for CW721QueryMsg {

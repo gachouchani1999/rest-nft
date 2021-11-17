@@ -19,12 +19,17 @@ pub enum ContractError {
 
     #[error("Token not found")]
     TokenNotFound {},
-
+    
+    #[error("No Balance in that denomination")]
+    NoFunds {},
     #[error("Cannot update frozen contract")]
     ContractFrozen {},
 
     #[error("Token supply exhausted")]
     MaxTokenSupply {},
+
+    #[error("Not enough funds sent")]
+    Funds {},
 }
 
 impl From<CW721ContractError> for ContractError {
