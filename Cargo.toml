@@ -1,7 +1,7 @@
 [workspace]
 members = ["contracts/*", "packages/*"]
 
-[profile.release.package.rest]
+[profile.release.package.rest-nft-base]
 opt-level = 3
 debug = false
 debug-assertions = false

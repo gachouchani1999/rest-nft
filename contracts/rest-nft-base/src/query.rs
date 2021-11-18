@@ -1,8 +1,6 @@
 use cosmwasm_std::{Deps, StdResult};
 
-
 use crate::state::{Config, CONFIG};
-use rest_nft::msg::{ReserveResponse};
 
 pub fn query_config(deps: Deps) -> StdResult<Config> {
     CONFIG.load(deps.storage)

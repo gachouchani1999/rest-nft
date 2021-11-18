@@ -224,6 +224,18 @@
         }
       },
       "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "reserved"
+      ],
+      "properties": {
+        "reserved": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": false
     }
   ]
 }
