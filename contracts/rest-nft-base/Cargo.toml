@@ -39,4 +39,11 @@ thiserror = { version = "1.0.23" }
 rest-nft = { path="../../packages/rest-nft", version = "0.9.3" }
 
 [dev-dependencies]
-cosmwasm-schema = "0.16.0" 
+cosmwasm-schema = "0.16.0"
+
+[package.metadata.scripts]
+optimize = """docker run --rm -v "$(cd ../.. && pwd)":/code \
+          --mount type=volume,source="$(basename "$(pwd)")_cache",target=/code/target \
+            --mount type=volume,source=registry_cache,target=/usr/local/cargo/registry \
+              cosmwasm/rust-optimizer:0.12.3"""
+

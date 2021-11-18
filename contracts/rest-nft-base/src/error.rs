@@ -19,9 +19,11 @@ pub enum ContractError {
 
     #[error("Token not found")]
     TokenNotFound {},
-    
+
     #[error("No Balance in that denomination")]
     NoFunds {},
+    #[error("Balance is less than amount to withdraw")]
+    FundsTooSmall {},
     #[error("Cannot update frozen contract")]
     ContractFrozen {},
 

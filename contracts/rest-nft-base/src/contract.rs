@@ -4,10 +4,12 @@ use cosmwasm_std::{to_binary, Binary, Deps, DepsMut, Env, MessageInfo, Response,
 
 use cw2::{get_contract_version, set_contract_version};
 pub use cw721_base::{MintMsg, MinterResponse};
-use rest_nft::msg::{ExecuteMsg, InstantiateMsg, MigrateMsg, QueryMsg, ReserveResponse};
+use rest_nft::msg::{ExecuteMsg, InstantiateMsg, MigrateMsg, QueryMsg};
 use rest_nft::state::RestNFTContract;
 
-use crate::execute::{execute_freeze, execute_mint, execute_set_minter, execute_update, execute_sweep, reserve_nft};
+use crate::execute::{
+    execute_freeze, execute_mint, execute_set_minter, execute_sweep, execute_update, reserve_nft,
+};
 
 use crate::query::{query_config, query_frozen, query_reserved};
 use crate::state::{Config, CONFIG};
@@ -23,7 +25,7 @@ pub fn instantiate(
     let config = Config {
         token_supply: msg.token_supply,
         frozen: false,
-        reserved_tokens : 0,
+        reserved_tokens: 0,
     };
 
     CONFIG.save(deps.storage, &config)?;
@@ -57,9 +59,12 @@ pub fn execute(
         ExecuteMsg::SetMinter { minter } => execute_set_minter(deps, env, info, minter),
 
         //Sweep Tokens
-        ExecuteMsg::Sweep {denom} => execute_sweep(deps, env, info, denom),
+        ExecuteMsg::Sweep { denom } => execute_sweep(deps, env, info, denom),
 
-        ExecuteMsg::Reserve {reserve_address, token_id} => reserve_nft(deps, env, info, reserve_address, token_id),
+        ExecuteMsg::Reserve {
+            reserve_address,
+            token_id,
+        } => reserve_nft(deps, env, info, reserve_address, token_id),
 
         // CW721 methods
         _ => RestNFTContract::default()
@@ -73,7 +78,7 @@ pub fn query(deps: Deps, env: Env, msg: QueryMsg) -> StdResult<Binary> {
     match msg {
         QueryMsg::Config {} => to_binary(&query_config(deps)?),
         QueryMsg::Frozen {} => to_binary(&query_frozen(deps)?),
-        QueryMsg::Reserved{} => to_binary(&query_reserved(deps)?),
+        QueryMsg::Reserved {} => to_binary(&query_reserved(deps)?),
         // CW721 methods
         _ => RestNFTContract::default().query(deps, env, msg.into()),
     }

@@ -268,6 +268,51 @@
         }
       },
       "additionalProperties": false
+    },
+    {
+      "description": "Send contract address to admin",
+      "type": "object",
+      "required": [
+        "sweep"
+      ],
+      "properties": {
+        "sweep": {
+          "type": "object",
+          "required": [
+            "denom"
+          ],
+          "properties": {
+            "denom": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "reserve"
+      ],
+      "properties": {
+        "reserve": {
+          "type": "object",
+          "required": [
+            "reserve_address",
+            "token_id"
+          ],
+          "properties": {
+            "reserve_address": {
+              "type": "string"
+            },
+            "token_id": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "additionalProperties": false
     }
   ],
   "definitions": {
